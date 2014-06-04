@@ -11,7 +11,7 @@ setup(
     author_email="github@lxyu.net",
     packages=["IP", ],
     package_data={'IP': ['17monipdb.dat'], },
-    entry_points={"console_scripts": ["ip = ip.cmd:ip", ]},
+    entry_points={"console_scripts": ["ip = IP.cmd:main", ]},
     url="http://lxyu.github.io/17monip/",
     license="MIT",
     long_description=open("README.rst").read(),
