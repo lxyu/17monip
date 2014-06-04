@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>17monip by lxyu</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>17monip</h1>
+        <p>IP search based on 17mon.cn, the best IP database for China.</p>
+
+        <p class="view"><a href="https://github.com/lxyu/17monip">View the Project on GitHub <small>lxyu/17monip</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/lxyu/17monip/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/lxyu/17monip/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/lxyu/17monip">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="17monip-python-lib" class="anchor" href="#17monip-python-lib"><span class="octicon octicon-link"></span></a>17MonIP Python Lib</h1>
+
+<p><img src="http://img.shields.io/pypi/v/17MonIP.svg?style=flat" alt="https://pypi.python.org/pypi/17MonIP"><img src="http://img.shields.io/travis/lxyu/17monip/master.svg?style=flat" alt="https://travis-ci.org/lxyu/17monip"><img src="http://img.shields.io/pypi/dm/17MonIP.svg?style=flat" alt="https://pypi.python.org/pypi/17MonIP"></p>
+
+<p>IP search based on 17mon.cn, the best IP database for china.</p>
+
+<p>Source: <a href="http://tool.17mon.cn">http://tool.17mon.cn</a></p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>pip install 17monip
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">IP</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">IP</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">"www.baidu.com"</span><span class="p">)</span>
+<span class="s">'中国</span><span class="se">\t</span><span class="s">浙江</span><span class="se">\t</span><span class="s">杭州'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">IP</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">)</span>
+<span class="s">'本机地址</span><span class="se">\t</span><span class="s">本机地址'</span>
+</pre></div>
+
+<h2>
+<a name="cmd-util" class="anchor" href="#cmd-util"><span class="octicon octicon-link"></span></a>CMD Util</h2>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ip ele.me
+中国    北京
+<span class="nv">$ </span>ip aliyun.com
+中国    浙江    杭州
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/lxyu">lxyu</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
