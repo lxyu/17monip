@@ -58,7 +58,7 @@ def _find_ip(ip):
         return
 
     res_offset = offset + index_offset - 1024
-    return dat[res_offset:res_offset + index_length].decode("utf-8")
+    return dat[res_offset:res_offset + index_length].decode("utf-8").strip()
 
 
 def find(ip):
