@@ -3,6 +3,11 @@
 
 from distutils.core import setup
 
+dev_requires = [
+    "flake8>=2.1.0",
+    "pytest>=2.5.2",
+]
+
 setup(
     name="17MonIP",
     version="0.1.0",
@@ -15,4 +20,7 @@ setup(
     url="http://lxyu.github.io/17monip/",
     license="MIT",
     long_description=open("README.rst").read(),
+    extras_require={
+        "dev": dev_requires,
+    },
 )
