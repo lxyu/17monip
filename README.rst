@@ -1,8 +1,8 @@
 17MonIP Python Lib
 ==================
 
-.. image:: http://img.shields.io/github/release/lxyu/17monip.svg?style=flat
-   :target: https://github.com/lxyu/17monip/releases
+.. image:: http://img.shields.io/pypi/v/17MonIP.svg?style=flat
+   :target: https://pypi.python.org/pypi/17MonIP
 
 .. image:: http://img.shields.io/travis/lxyu/17monip/master.svg?style=flat
    :target: https://travis-ci.org/lxyu/17monip
