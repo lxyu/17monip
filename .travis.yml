@@ -8,4 +8,4 @@ install:
   - pip install -e ".[dev]"
 script:
   - flake8 IP
-  - pytest
+  - py.test
