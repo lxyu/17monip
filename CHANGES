@@ -1,0 +1,18 @@
+17MonIP Changelog
+=================
+
+Version 0.2.0
+-------------
+
+Released on June 4, 2014.
+
+- update dat version to 20140601
+- increased accuracy from province to city
+- add command line utils
+- add tests
+
+
+Version 0.1.0
+-------------
+
+First release.
