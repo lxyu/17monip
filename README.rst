@@ -38,7 +38,7 @@ CMD Util
 
 .. code:: bash
 
-    $ ip ele.me
+    $ iploc ele.me
     中国    北京
-    $ ip aliyun.com
+    $ iploc aliyun.com
     中国    浙江    杭州
