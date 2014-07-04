@@ -1,6 +1,17 @@
 17MonIP Changelog
 =================
 
+Version 0.2.1
+-------------
+
+Released on July 4, 2014.
+
+- update dat version to 20140701
+- change bin script from 'ip' to 'iploc' via `#2`_.
+
+.. _`#2`: https://github.com/lxyu/17monip/issues/2
+
+
 Version 0.2.0
 -------------
 
