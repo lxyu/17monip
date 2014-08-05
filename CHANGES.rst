@@ -1,6 +1,15 @@
 17MonIP Changelog
 =================
 
+Version 0.2.2
+-------------
+
+Released on August 5, 2014.
+
+- update dat version to 20140804
+- update tests and docs
+
+
 Version 0.2.1
 -------------
 

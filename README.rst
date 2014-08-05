@@ -14,6 +14,7 @@ IP search based on 17mon.cn, the best IP database for china.
 
 Source: http://tool.17mon.cn
 
+
 Install
 -------
 
@@ -39,6 +40,12 @@ CMD Util
 .. code:: bash
 
     $ iploc ele.me
-    中国    北京
+    中国    北京    北京
     $ iploc aliyun.com
     中国    浙江    杭州
+
+
+Changelog
+---------
+
+https://github.com/lxyu/17monip/blob/master/CHANGES.rst
