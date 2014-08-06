@@ -18,7 +18,7 @@ Source: http://tool.17mon.cn
 Install
 -------
 
-Supports python2.7 to python3.4 and pypy.
+Supports python2.6 to python3.4 and pypy.
 
 .. code:: bash
 
