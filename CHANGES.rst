@@ -1,6 +1,14 @@
 17MonIP Changelog
 =================
 
+Version 0.2.3
+-------------
+
+Released on August 6, 2014.
+
+- add support for py2.6, py3.2
+
+
 Version 0.2.2
 -------------
 

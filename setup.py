@@ -10,7 +10,7 @@ dev_requires = [
 
 setup(
     name="17MonIP",
-    version="0.2.2",
+    version="0.2.3",
     description="IP search based on 17mon.cn, the best IP database for China.",
     author="Lx Yu",
     author_email="github@lxyu.net",
