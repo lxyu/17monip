@@ -38,7 +38,7 @@ def memoize(func):
 def _find_ip(ip):
     nip = socket.inet_aton(ip)
 
-    tmp_offset = int(ip.split(".")[0]) * 4
+    tmp_offset = bytearray(nip)[0] * 4
     start, = _unpack_V(index[tmp_offset:tmp_offset + 4])
 
     index_offset = index_length = 0
