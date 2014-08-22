@@ -90,6 +90,9 @@ class IPv4Database(object):
         return self._buf[offset:offset + data_length].decode('utf-8')
 
     def find(self, ip):
+        if self._is_closed:
+            raise ValueError('I/O operation on closed dat file')
+
         return self._lookup_ipv4(ip)
 
 
