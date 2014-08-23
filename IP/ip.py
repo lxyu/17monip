@@ -87,7 +87,8 @@ class IPv4Database(object):
             return None
 
         offset = self._offset + data_pos - 1024
-        return self._buf[offset:offset + data_length].decode('utf-8')
+        value = self._buf[offset:offset + data_length]
+        return value.decode('utf-8').strip()
 
     def find(self, ip):
         if self._is_closed:
