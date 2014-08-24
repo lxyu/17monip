@@ -1,70 +1,108 @@
 # -*- coding: utf-8 -*-
 
-import sys
-
-PY2 = sys.version_info[0] == 2
-
-import functools
 import os
+import mmap
 import socket
 import struct
 
-_unpack_V = lambda b: struct.unpack("<L", b)
-_unpack_N = lambda b: struct.unpack(">L", b)
-_unpack_C = lambda b: struct.unpack("B", b)
+__all__ = ['IPv4Database', 'find']
 
-with open(os.path.join(os.path.dirname(__file__), "17monipdb.dat"), "rb") as f:
-    dat = f.read()
-    offset, = _unpack_N(dat[:4])
-    max_comp_len = offset - 1028
-    index = dat[4:offset]
+_unpack_V = lambda b: struct.unpack("<L", b)[0]
+_unpack_N = lambda b: struct.unpack(">L", b)[0]
 
 
-def memoize(func):
-    """Memoize for functions based on memory
+def _unpack_C(b):
+    if isinstance(b, int):
+        return b
+    return struct.unpack("B", b)[0]
+
+
+datfile = os.path.join(os.path.dirname(__file__), "17monipdb.dat")
+
+
+class IPv4Database(object):
+    """Database for search IPv4 address.
+
+    The 17mon dat file format in bytes::
+
+        -----------
+        | 4 bytes |                     <- offset number
+        -----------------
+        | 256 * 4 bytes |               <- first ip number index
+        -----------------------
+        | offset - 1028 bytes |         <- ip index
+        -----------------------
+        |    data  storage    |
+        -----------------------
     """
-    cache = func.cache = {}
+    def __init__(self, filename=None):
+        if filename is None:
+            filename = datfile
+        with open(filename, 'rb') as f:
+            buf = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
 
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        key = "{0}{1}".format(args, kwargs)
-        if key not in cache:
-            cache[key] = func(*args, **kwargs)
-        return cache[key]
-    return wrapper
+        self._buf = buf
 
+        self._offset = _unpack_N(buf[:4])
+        self._is_closed = False
 
-@memoize
-def _find_ip(ip):
-    nip = socket.inet_aton(ip)
+    def __enter__(self):
+        return self
 
-    tmp_offset = bytearray(nip)[0] * 4
-    start, = _unpack_V(index[tmp_offset:tmp_offset + 4])
+    def __exit__(self, type, value, traceback):
+        self.close()
 
-    index_offset = index_length = 0
-    start = start * 8 + 1024
-    while start < max_comp_len:
-        if index[start:start + 4] >= nip:
-            index_offset, = _unpack_V(
-                index[start + 4:start + 7] + b'\0')
-            if PY2:
-                index_length, = _unpack_C(index[start + 7])
-            else:
-                index_length = index[start + 7]
-            break
-        start += 8
+    def close(self):
+        self._buf.close()
+        self._is_closed = True
 
-    if index_offset == 0:
-        return
+    def _lookup_ipv4(self, ip):
+        nip = socket.inet_aton(ip)
 
-    res_offset = offset + index_offset - 1024
-    return dat[res_offset:res_offset + index_length].decode("utf-8").strip()
+        # first IP number
+        fip = bytearray(nip)[0]
+        # 4 + (fip - 1) * 4
+        fip_offset = fip * 4 + 4
+
+        # position in the index block
+        count = _unpack_V(self._buf[fip_offset:fip_offset + 4])
+        pos = count * 8
+
+        offset = pos + 1028
+
+        data_length = 0
+        data_pos = 0
+
+        while offset < self._offset:
+            endip = self._buf[offset:offset + 4]
+            if nip <= endip:
+                data_pos = _unpack_V(
+                    self._buf[offset + 4:offset + 7] + b'\0'
+                )
+                data_length = _unpack_C(self._buf[offset + 7])
+                break
+            offset += 8
+
+        if not data_pos:
+            return None
+
+        offset = self._offset + data_pos - 1024
+        value = self._buf[offset:offset + data_length]
+        return value.decode('utf-8').strip()
+
+    def find(self, ip):
+        if self._is_closed:
+            raise ValueError('I/O operation on closed dat file')
+
+        return self._lookup_ipv4(ip)
 
 
 def find(ip):
+    # keep find for compatibility
     try:
         ip = socket.gethostbyname(ip)
     except socket.gaierror:
         return
 
-    return _find_ip(ip)
+    with IPv4Database() as db:
+        return db.find(ip)
