@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-import mmap
 import socket
 import struct
+try:
+    import mmap
+except ImportError:
+    mmap = None
 
 __all__ = ['IPv4Database', 'find']
 
@@ -35,12 +38,17 @@ class IPv4Database(object):
         |    data  storage    |
         -----------------------
     """
-    def __init__(self, filename=None):
+    def __init__(self, filename=None, use_mmap=True):
         if filename is None:
             filename = datfile
         with open(filename, 'rb') as f:
-            buf = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+            if use_mmap and mmap is not None:
+                buf = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+            else:
+                buf = f.read()
+                use_mmap = False
 
+        self._use_mmap = use_mmap
         self._buf = buf
 
         self._offset = _unpack_N(buf[:4])
@@ -53,7 +61,8 @@ class IPv4Database(object):
         self.close()
 
     def close(self):
-        self._buf.close()
+        if self._use_mmap:
+            self._buf.close()
         self._is_closed = True
 
     def _lookup_ipv4(self, ip):
