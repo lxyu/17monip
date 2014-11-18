@@ -1,6 +1,18 @@
 17MonIP Changelog
 =================
 
+Version 0.2.4
+-------------
+
+Released on November 18, 2014.
+
+- update dat version to 20141001
+- code rewrite via `#3`_ and `#5`_,
+
+.. _`#3`: https://github.com/lxyu/17monip/issues/3
+.. _`#5`: https://github.com/lxyu/17monip/issues/5
+
+
 Version 0.2.3
 -------------
 
