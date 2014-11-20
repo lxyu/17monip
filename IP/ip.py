@@ -82,7 +82,7 @@ class IPv4Database(object):
         data_length = 0
         data_pos = 0
 
-        lo, hi = 0, (self._offset - offset) / 8
+        lo, hi = 0, (self._offset - offset) // 8
 
         while lo < hi:
             mid = (lo + hi) // 2
