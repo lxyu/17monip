@@ -91,10 +91,8 @@ class IPv4Database(object):
 
             if mid_val < nip:
                 lo = mid + 1
-            elif mid_val > nip:
-                hi = mid
             else:
-                break
+                hi = mid
 
         offset = pos + 1028 + 8 * lo
         if offset == self._offset:
