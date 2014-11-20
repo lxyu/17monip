@@ -82,18 +82,26 @@ class IPv4Database(object):
         data_length = 0
         data_pos = 0
 
-        while offset < self._offset:
-            endip = self._buf[offset:offset + 4]
-            if nip <= endip:
-                data_pos = _unpack_V(
-                    self._buf[offset + 4:offset + 7] + b'\0'
-                )
-                data_length = _unpack_C(self._buf[offset + 7])
-                break
-            offset += 8
+        lo, hi = 0, (self._offset - offset) / 8
 
-        if not data_pos:
+        while lo < hi:
+            mid = (lo + hi) // 2
+            mid_offset = pos + 1028 + 8 * mid
+            mid_val = self._buf[mid_offset: mid_offset+4]
+
+            if mid_val < nip:
+                lo = mid + 1
+            elif mid_val > nip:
+                hi = mid
+            else:
+                break
+
+        offset = pos + 1028 + 8 * lo
+        if offset == self._offset:
             return None
+
+        data_pos = _unpack_V(self._buf[offset + 4:offset + 7] + b'\0')
+        data_length = _unpack_C(self._buf[offset + 7])
 
         offset = self._offset + data_pos - 1024
         value = self._buf[offset:offset + data_length]
