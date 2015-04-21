@@ -1,6 +1,14 @@
 17MonIP Changelog
 =================
 
+Version 0.2.6
+-------------
+
+Released on April 21, 2015.
+
+- support python wheel
+
+
 Version 0.2.5
 -------------
 
