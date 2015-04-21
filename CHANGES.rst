@@ -1,6 +1,17 @@
 17MonIP Changelog
 =================
 
+Version 0.2.5
+-------------
+
+Released on April 21, 2015.
+
+- update dat version to 20150401
+- use binary search to replace line search for speed boost, via #7
+
+.. _`#7`: https://github.com/lxyu/17monip/issues/7
+
+
 Version 0.2.4
 -------------
 
